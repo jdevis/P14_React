@@ -36,7 +36,9 @@ a{
 a:hover{
   text-decoration: none;
 }
-
+h1,h2{
+  padding-bottom: .75em;
+}
 #root {
   max-width: 1440px;
   margin: 0 auto;
@@ -52,12 +54,12 @@ img, video {
   max-width: 100%;
   height: auto;
 }
-fieldset, input, textarea, select, button {
+input, textarea, select, button {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  border: none;
   outline: none;
+  margin: .5em;
 }
 table {
   border-collapse: collapse;
