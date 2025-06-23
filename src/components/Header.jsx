@@ -12,9 +12,9 @@ const Header = () => {
     <header>
       <Container maxWidth="sm">
         <Box sx={{ my: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <Typography variant="h1" component="h1" sx={{ color: 'text.primary' }}>
-            <Typography variant='h1' component="span" sx={{ color: green1 }}>H</Typography>
-            <Typography variant='h1' component="span" sx={{ color: green2 }}>R</Typography>
+          <Typography variant="h3" component="h1" sx={{ color: 'text.primary' }}>
+            <Typography variant='h3' component="span" sx={{ color: green1 }}>H</Typography>
+            <Typography variant='h3' component="span" sx={{ color: green2 }}>R</Typography>
             net
           </Typography>
           <Breadcrumbs aria-label="breadcrumb">
