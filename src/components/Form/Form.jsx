@@ -21,19 +21,22 @@ const Form = ({ setIsOpen }) => {
 
   const green1 = green['A400'] // green color for the button
   const green2 = green[900] // darker green color for the button
+
+  // Calculate the date 18 years ago from today
   const today = new Date();
   const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-  console.log('date du jour :', today)
-  console.log('date 18 ans :', eighteenYearsAgo)
+
+  // Define the states for the form inputs
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [birthDate, setBirthDate] = useState(dayjs(eighteenYearsAgo).format('YYYY-MM-DD')) // default to 18 years ago
-  const [startDate, setStartDate] = useState(dayjs(today).format('YYYY-MM-DD'))
+  const [birthDate, setBirthDate] = useState(dayjs(eighteenYearsAgo)) // default to 18 years ago
+  const [startDate, setStartDate] = useState(dayjs(today))
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
   const [zipCode, setZipCode] = useState('')
-  const [choosedState, setChoosedState] = useState('') // state for the select component
-  const [choosedDepartement, setChoosedDepartement] = useState('') // state for the select component
+  const [choosedState, setChoosedState] = useState('')
+  const [choosedDepartement, setChoosedDepartement] = useState('')
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const employees = JSON.parse(localStorage.getItem('createdEmployees')) || [];
@@ -75,7 +78,7 @@ const Form = ({ setIsOpen }) => {
           label="Birthdate"
           value={birthDate ? dayjs(birthDate) : null}
           onChange={(newValue) => setBirthDate(newValue ? newValue.toISOString().split('T')[0] : '')}
-          maxDate={dayjs(eighteenYearsAgo)} // ensure the user is at least 18 years old
+          maxDate={dayjs(eighteenYearsAgo)} // ensure the user can't choose a date after 18 years ago
           slotProps={{ textField: { fullWidth: true, required: true, sx: { mb: 2, mt: 0 } } }}
         />
         <DatePicker
