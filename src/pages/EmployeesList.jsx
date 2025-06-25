@@ -27,12 +27,12 @@ const columns = [
   {
     field: 'birthDate',
     headerName: 'Birthdate',
-    type: 'date',
+    type: 'date'
   },
   {
     field: 'startDate',
     headerName: 'Start date',
-    type: 'date',
+    type: 'date'
   },
   { field: 'street', headerName: 'Street' },
   { field: 'city', headerName: 'City' },
@@ -59,15 +59,24 @@ const paginationModel = { page: 0, pageSize: 10 };
 
 const EmployeesList = () => {
   return (
-    <Paper sx={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[10, 20]}
-        sx={{ border: 0 }}
-      />
-    </Paper>
+    <main>
+      <Paper elevation={2} sx={{ height: '100%', width: '90%', m: 'auto' }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{ pagination: { paginationModel } }}
+          pageSizeOptions={[10, 20]}
+          sx={{ border: 0 }}
+          showToolbar
+          density='standard'
+          autosizeOptions={{
+            columns: ['firstName', 'lastName', 'birthDate', 'startDate', 'street', 'city', 'zipCode', 'state', 'department'],
+            includeOutliers: true,
+            includeHeaders: true,
+          }}
+        />
+      </Paper>
+    </main>
   );
 }
 export default EmployeesList
