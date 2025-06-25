@@ -11,10 +11,6 @@ import { EMPLOYEES, STATES } from '../../data/mockData'
 
 const Form = ({ setIsOpen, onFormSubmit }) => {
 
-  // Define the states and departments from the mock data
-  const states = STATES.map((state) => state.name)
-    .filter((value, index, self) => self.indexOf(value) === index) // remove duplicates
-    .sort() // sort alphabetically
   const departements = EMPLOYEES.map((employee) => employee.department)
     .filter((value, index, self) => self.indexOf(value) === index) // remove duplicates
     .sort() // sort alphabetically
@@ -128,8 +124,8 @@ const Form = ({ setIsOpen, onFormSubmit }) => {
             required
           >
             <MenuItem value=""> <em>None</em></MenuItem>
-            {states.map((state, index) => (
-              <MenuItem key={index} value={state}>{state}</MenuItem>
+            {STATES.map((state, index) => (
+              <MenuItem key={index} value={state.abbreviation}>{state.name}, {state.abbreviation}</MenuItem>
             ))}
           </Select>
         </FormControl>
