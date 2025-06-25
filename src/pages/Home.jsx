@@ -7,7 +7,10 @@ import { Modal } from 'hrnet-simple-modal'
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false) // retrieving modal
-
+  const [modalContent, setModalContent] = useState({ firstName: '', lastName: '' })
+  const handleFormSubmit = (firstName, lastName) => {
+    setModalContent({ firstName, lastName })
+  }
   return (
     <>
       <main>
@@ -17,14 +20,14 @@ const Home = () => {
               Create Employee
             </Typography>
             <Box component='div' >
-              <Form setIsOpen={setIsOpen} />
+              <Form setIsOpen={setIsOpen} onFormSubmit={handleFormSubmit} />
             </Box>
           </Paper>
         </Container>
         {isOpen && createPortal(
           <Modal
             title='Employee Creation'
-            content={<p>Employee created successfully!</p>}
+            content={<p>Employee {modalContent.firstName} {modalContent.lastName} created successfully!</p>}
             styles={{ fontFamily: 'Roboto' }}
             onClose={() => setIsOpen(false)}
           />,

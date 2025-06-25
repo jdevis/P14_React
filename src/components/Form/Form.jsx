@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { green } from '@mui/material/colors'
 import { EMPLOYEES, STATES } from '../../data/mockData'
 
-const Form = ({ setIsOpen }) => {
+const Form = ({ setIsOpen, onFormSubmit }) => {
 
   // Define the states and departments from the mock data
   const states = STATES.map((state) => state.name)
@@ -53,6 +53,7 @@ const Form = ({ setIsOpen }) => {
     };
     employees.push(newEmployee);
     localStorage.setItem('createdEmployees', JSON.stringify(employees));
+    onFormSubmit(firstName, lastName);
     setIsOpen(true) // open the modal
   }
   return (
