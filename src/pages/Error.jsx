@@ -1,5 +1,6 @@
-import { Box, Typography } from '@mui/material';
-import { green } from '@mui/material/colors';
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import { green } from '@mui/material/colors'
 
 const primary = green[900]
 
@@ -19,7 +20,7 @@ const Error = () => {
         404
       </Typography>
       <Typography variant="h6" style={{ color: 'white' }}>
-        The page you’re looking for doesn’t exist.
+        The page you're looking for doesn't exist.
       </Typography>
     </Box>
   );

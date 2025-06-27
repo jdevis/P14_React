@@ -1,13 +1,19 @@
 // form components
-import { TextField, InputLabel, Select, MenuItem, FormControl, Button, Box, Typography } from '@mui/material'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import TextInput from './FormInputs/TextInput'
+import SelectInput from './FormInputs/SelectInput'
+import DateInput from './FormInputs/DateInput'
+import FormControl from '@mui/material/FormControl'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+// date picker components
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import dayjs from 'dayjs'
 
 import { useState } from 'react'
 import { green } from '@mui/material/colors'
-import { EMPLOYEES, STATES } from '../../data/mockData'
+import { EMPLOYEES, STATES } from '../data/mockData'
 
 const Form = ({ setIsOpen, onFormSubmit }) => {
 
@@ -55,15 +61,17 @@ const Form = ({ setIsOpen, onFormSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', mb: 2 }}>
-        <TextField
+        <TextInput
           id="firstname"
+          name='firstname'
           label="First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           required
         />
-        <TextField
+        <TextInput
           id="lastname"
+          name='lastname'
           label="Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
@@ -71,87 +79,93 @@ const Form = ({ setIsOpen, onFormSubmit }) => {
         />
       </Box>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
+        <DateInput
+          id="birthdate"
+          name='birthdate'
           label="Birthdate"
           value={birthDate ? dayjs(birthDate) : null}
           onChange={(newValue) => setBirthDate(newValue ? newValue.toISOString().split('T')[0] : '')}
           maxDate={dayjs(eighteenYearsAgo)} // ensure the user can't choose a date after 18 years ago
-          slotProps={{ textField: { fullWidth: true, required: true, sx: { mb: 2, mt: 0 } } }}
+          required
         />
-        <DatePicker
+        <DateInput
+          id="startdate"
+          name='startdate'
           label="Start date"
           value={startDate ? dayjs(startDate) : null}
           onChange={(newValue) => setStartDate(newValue ? newValue.toISOString().split('T')[0] : '')}
-          slotProps={{ textField: { fullWidth: true, required: true, sx: { mb: 1, mt: 0 } } }}
+          required
         />
       </LocalizationProvider>
       <Box sx={{ mb: 2 }}>
         <Typography component='legend' sx={{ mt: 1, mb: 0 }}>Address</Typography>
-        <TextField
+        <TextInput
           id="street"
+          name='street'
           label="Street"
           value={street}
           onChange={(e) => setStreet(e.target.value)}
-          fullWidth
-          sx={{ mt: 1 }}
+          sx={{ width: '100%', mt: 1, mb: 1 }}
           required
         />
-        <TextField
+        <TextInput
           id="city"
+          name='city'
           label="City"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          fullWidth
-          margin="normal"
+          sx={{ width: '100%', mt: 1, mb: 1 }}
           required
         />
-        <TextField
+        <TextInput
           id="zipCode"
+          name='zipCode'
           label="Zip Code"
+          type="number"
           value={zipCode}
           onChange={(e) => setZipCode(e.target.value)}
-          fullWidth
-          margin="normal"
+          sx={{ width: '100%', mt: 1, mb: 1 }}
           required
         />
-        <FormControl fullWidth margin="normal" required>
-          <InputLabel>State</InputLabel>
-          <Select
+        <FormControl sx={{ width: '100%', mt: 1, mb: 1 }} required>
+          <SelectInput
             value={choosedState}
             onChange={(e) => setChoosedState(e.target.value)}
             label="State"
             id="states"
-            required
-          >
-            <MenuItem value=""> <em>None</em></MenuItem>
-            {STATES.map((state, index) => (
-              <MenuItem key={index} value={state.abbreviation}>{state.name}, {state.abbreviation}</MenuItem>
-            ))}
-          </Select>
+            name='states'
+            labelId='statesLabel'
+            options={STATES.map(state => ({
+              value: state.abbreviation,
+              label: `${state.name}, ${state.abbreviation}`
+            }))}
+          />
         </FormControl>
         <Typography component='legend' sx={{ mt: 1, mb: 0 }}>Role</Typography>
-        <FormControl fullWidth sx={{ mt: 1 }} required>
-          <InputLabel>Department</InputLabel>
-          <Select
+        <FormControl sx={{ width: '100%', mt: 1, mb: 1 }} required>
+          <SelectInput
             value={choosedDepartement}
             onChange={(e) => setChoosedDepartement(e.target.value)}
             label="Department"
             id="departement"
-            required
-          >
-            <MenuItem value=""><em>None</em></MenuItem>
-            {departements.map((department, index) => (
-              <MenuItem key={index} value={department}>{department}</MenuItem>
-            ))}
-          </Select>
+            labelId='departmentLabel'
+            name='departement'
+            options={departements.map(department => ({
+              value: department,
+              label: department
+            }))}
+          />
         </FormControl>
       </Box>
-      <Button type="submit" variant="contained" sx={{
-        mt: 2, bgcolor: green1,
-        '&:hover': {
+      <Button type="submit" variant="contained"
+        sx={{
+          mt: 2,
           bgcolor: green2,
-        },
-      }} fullWidth>
+          '&:hover': {
+            bgcolor: green1,
+          },
+          width: '100%',
+        }}>
         Save Employee
       </Button>
     </form>

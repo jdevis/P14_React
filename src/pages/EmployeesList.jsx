@@ -1,4 +1,4 @@
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid/DataGrid';
 import Paper from '@mui/material/Paper';
 import { EMPLOYEES } from '../data/mockData';
 

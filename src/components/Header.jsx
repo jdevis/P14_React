@@ -4,8 +4,9 @@ import Container from '@mui/material/Container';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import { green } from '@mui/material/colors';
+import { memo } from 'react';
 
-const Header = () => {
+const Header = memo(() => {
   const green1 = green['A400'];
   const green2 = green[900];
   return (
@@ -32,6 +33,6 @@ const Header = () => {
       </Container>
     </header>
   )
-}
+}, [])
 
 export default Header

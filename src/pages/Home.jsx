@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Container, Typography, Box, Paper } from '@mui/material'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 
-import Form from '../components/Form/Form'
+import Form from '../components/Form'
 import { Modal } from 'hrnet-simple-modal'
 
 const Home = () => {
