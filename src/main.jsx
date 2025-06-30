@@ -8,13 +8,13 @@ import Error from './pages/Error'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/employeesList" element={<EmployeesList />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </Router>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/employeesList" element={<EmployeesList />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </Router>
   </StrictMode>,
 )
