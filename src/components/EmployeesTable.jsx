@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid/DataGrid'
 import Paper from '@mui/material/Paper'
-import { EMPLOYEES } from '../data/mockData'
+import { useEmployees } from './EmployeesContext';
 
 // Define the columns for the DataGrid
 const columns = [
@@ -25,27 +25,21 @@ const columns = [
 ];
 
 const EmployeesTable = () => {
-  const [rows, setRows] = useState([])
+  const { employees } = useEmployees();
 
-  useEffect(() => {
-    const createdEmployee = JSON.parse(localStorage.getItem('createdEmployees') || '[]')
-    const allEmployees = [
-      ...EMPLOYEES,
-      ...createdEmployee
-    ]
-    setRows(allEmployees.map((employee, index) => ({
-      id: index + 1,
-      firstName: employee.firstName,
-      lastName: employee.lastName,
-      birthDate: new Date(employee.birthDate),
-      startDate: new Date(employee.startDate),
-      street: employee.street,
-      city: employee.city,
-      zipCode: employee.zipCode,
-      state: employee.state,
-      department: employee.department,
-    })))
-  }, [])
+  const rows = employees.map((employee, index) => ({
+    id: index + 1,
+    firstName: employee.firstName,
+    lastName: employee.lastName,
+    birthDate: employee.birthDate ? new Date(employee.birthDate) : '',
+    startDate: employee.startDate ? new Date(employee.startDate) : '',
+    street: employee.street,
+    city: employee.city,
+    zipCode: employee.zipCode,
+    state: employee.state,
+    department: employee.department,
+  }));
+
   return (
     <main>
       <Paper elevation={2} sx={{ height: '100%', width: '90%', m: 'auto' }}>

@@ -14,6 +14,7 @@ import dayjs from 'dayjs'
 import { useState } from 'react'
 import { green } from '@mui/material/colors'
 import { EMPLOYEES, STATES } from '../data/mockData'
+import { useEmployees } from './EmployeesContext'
 
 const Form = ({ setIsOpen, onFormSubmit }) => {
 
@@ -28,6 +29,9 @@ const Form = ({ setIsOpen, onFormSubmit }) => {
   const today = new Date();
   const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
 
+  // Use the EmployeesContext to access the employees state
+  const { employees, setEmployees } = useEmployees();
+
   // Define the states for the form inputs
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -40,23 +44,21 @@ const Form = ({ setIsOpen, onFormSubmit }) => {
   const [choosedDepartement, setChoosedDepartement] = useState('')
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const employees = JSON.parse(localStorage.getItem('createdEmployees')) || [];
+    e.preventDefault();
     const newEmployee = {
-      firstName: firstName,
-      lastName: lastName,
-      birthDate: birthDate,
-      startDate: startDate,
-      street: street,
-      city: city,
+      firstName,
+      lastName,
+      birthDate: birthDate ? dayjs(birthDate).toISOString() : '',
+      startDate: startDate ? dayjs(startDate).toISOString() : '',
+      street,
+      city,
       state: choosedState,
-      zipCode: zipCode,
+      zipCode,
       department: choosedDepartement
     };
-    employees.push(newEmployee);
-    localStorage.setItem('createdEmployees', JSON.stringify(employees));
+    setEmployees(prev => [...prev, newEmployee]);
     onFormSubmit(firstName, lastName);
-    setIsOpen(true) // open the modal
+    setIsOpen(true);
   }
   return (
     <form onSubmit={handleSubmit}>

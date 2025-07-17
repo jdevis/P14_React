@@ -6,6 +6,8 @@ import Link from '@mui/material/Link';
 import { green } from '@mui/material/colors';
 import { memo } from 'react';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 const Header = memo(() => {
   const green1 = green['A400'];
   const green2 = green[900];
@@ -19,13 +21,14 @@ const Header = memo(() => {
             net
           </Typography>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link underline="hover" color="inherit" href="/">
+            <Link component={RouterLink} underline="hover" color="inherit" to="/">
               Create employee
             </Link>
             <Link
+              component={RouterLink}
               underline="hover"
               color="inherit"
-              href="/employeesList">
+              to="/employeesList">
               List of employees
             </Link>
           </Breadcrumbs>
